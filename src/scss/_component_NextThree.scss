@@ -1,0 +1,36 @@
+$ballsColors: (
+        'RED': #cb1c50,
+        'GREEN': #3eba23,
+        'YELLOW': #fcdc00,
+        'BLUE': #51afff,
+        'CYAN': cyan,
+        'GRAY': rgba(170, 170, 170, 0.67),
+        'PURPLE': #7d1e92
+);
+
+component-next-three {
+  grid-column: 1 / -1;
+  @include breakpoint(tab){ grid-column: span 3; }
+  @include flex(row, wrap);
+  @include glass-card;
+
+  .balls {
+    @include flex(column, nowrap);
+    width: 100%;
+    height: auto;
+
+    .ball {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      margin: .5rem 1rem;
+      box-shadow: $shadow;
+
+      @each $name,$color in $ballsColors{
+        &.#{$name}{
+          background-color: $color;
+        }
+      }
+    }
+  }
+}

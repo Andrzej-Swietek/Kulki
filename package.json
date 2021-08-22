@@ -1,0 +1,27 @@
+{
+  "name": "gra_w_kulki",
+  "version": "1.0.0",
+  "description": "Gra w kulki w Typescript",
+  "dependencies": {
+    "commonjs": "^0.0.1",
+    "typescript": "^4.0.3",
+    "webpack-cli": "^4.1.0"
+  },
+  "devDependencies": {
+    "sass": "^1.38.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^2.0.0",
+    "css-loader": "^5.2.1",
+    "ts-loader": "^8.0.6",
+    "webpack": "^5.50.0"
+  },
+  "scripts": {
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "go": "webpack --mode development && webpack serve --open"
+  },
+  "main": "index.js",
+  "author": "Andrzej Świętek",
+  "license": "ISC"
+}
