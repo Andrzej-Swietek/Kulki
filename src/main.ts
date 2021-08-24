@@ -2,10 +2,12 @@ import './scss/main.scss';
 import { PointsCounter } from "./components/PointsCounter";
 import { NextThree } from "./components/NextThree";
 import { Board } from "./components/Board";
-import {query, queryAll} from "./utils/domQuery";
-import {GraphNode} from "./components/GraphNode";
 import {shortestPath} from "./algorithms/ShortestPath";
 import {Colors} from "./enums/Colors";
+import {query} from "./utils/domQuery";
+import {randomNumber} from "./utils/random";
+import {GraphNode} from "./components/GraphNode";
+import {store} from "./store";
 
 
 
@@ -13,6 +15,7 @@ class Game {
     private pointsCounter: PointsCounter;
     private nextThree: NextThree;
     private board: Board;
+    protected target: GraphNode | null;
 
     constructor() {
         this.pointsCounter = new PointsCounter();
@@ -26,18 +29,20 @@ class Game {
         this.nextThree.mount(document.body);
     }
 
+    private putBalls( balls: Array<Colors> ) {
+        balls.forEach( ball => {
+            let field = this.board.Graph[randomNumber(0,10)][randomNumber(0,10)];
+            while (field.state !== Colors.EMPTY)
+                field = this.board.Graph[randomNumber(0,10)][randomNumber(0,10)];
+
+            field.insertBall( ball )
+        })
+    }
     public start() {
-        console.log(this.nextThree.state);
         this.nextThree.drawNewBalls();
-        this.board.Graph[2][0].state = Colors.RED;
-        this.board.Graph[2][1].state = Colors.RED;
-        this.board.Graph[2][2].state = Colors.RED;
-        this.board.Graph[4][2].state = Colors.RED;
-        this.board.Graph[5][3].state = Colors.RED;
-        this.board.Graph[7][2].state = Colors.RED;
-        shortestPath(this.board.Graph,this.board.Graph[1][9], this.board.Graph[8][1] )
-
-
+        this.putBalls( this.nextThree.state );
+        this.nextThree.drawNewBalls();
+        // shortestPath( this.board.Graph, store.target, this.board.Graph[8][1] )
     }
 
 }

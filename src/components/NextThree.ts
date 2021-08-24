@@ -5,6 +5,7 @@ import { Colors } from "../enums/Colors";
 import { LifeCycle } from "../interfaces/LifeCycle";
 import { HTMLComponent } from "../HTMLComponent";
 import { Log } from "../decorators/Log";
+import {GraphNode} from "./GraphNode";
 
 @UIComponent({
     selector: 'component-next-three',
@@ -27,6 +28,7 @@ export class NextThree extends HTMLComponent implements LifeCycle{
     connectedCallback(){}
     componentDidMount() {
         this._state.forEach(ball => {
+            console.log(ball)
             query`.balls`.appendChild( create`div${ ['ball' , ball.toString()] }${ '<h1> ⚬ </h1>' }`)
         })
     }
@@ -38,11 +40,10 @@ export class NextThree extends HTMLComponent implements LifeCycle{
     @Log
     public drawNewBalls() {
         this.ballsGenerator.getNextBalls().value;
-        // TODO: UPDATE HTML
-        const children = query`.balls`.children;
-        for (let i = 0; i < children.length; i++) {
-            children[i]
-        }
-
+        queryAll`.balls > .ball`.forEach( (ballPreview:HTMLElement,i:number) => {
+            ballPreview.classList.forEach( (classListElement:string) => ballPreview.classList.remove(classListElement) )
+            ballPreview.classList.add('ball');
+            ballPreview.classList.add(Colors[i]);
+        })
     }
 }

@@ -9,8 +9,9 @@ export default class BallsGenerator {
         this.generator = this.generateBalls()
     }
     *generateBalls(){
-        while(true)
+        while(true){
             yield [ Colors[random(Colors, [Colors.EMPTY])], Colors[random(Colors, [Colors.EMPTY])], Colors[random(Colors, [Colors.EMPTY])] ]
+        }
     }
     getNextBalls() {
         return this.generator.next();
