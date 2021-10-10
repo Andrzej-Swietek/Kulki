@@ -22,13 +22,11 @@ export class NextThree extends HTMLComponent implements LifeCycle{
     constructor() {
         super();
         this.ballsGenerator = new BallsGenerator();
-        this._state = this.ballsGenerator.getNextBalls().value
-        console.log(this._state)
+        this._state = this.ballsGenerator.getNextBalls().value;
     }
     connectedCallback(){}
     componentDidMount() {
         this._state.forEach(ball => {
-            console.log(ball)
             query`.balls`.appendChild( create`div${ ['ball' , ball.toString()] }${ '<h1> ⚬ </h1>' }`)
         })
     }
@@ -39,11 +37,12 @@ export class NextThree extends HTMLComponent implements LifeCycle{
 
     @Log
     public drawNewBalls() {
-        this.ballsGenerator.getNextBalls().value;
+        this._state = this.ballsGenerator.getNextBalls().value
         queryAll`.balls > .ball`.forEach( (ballPreview:HTMLElement,i:number) => {
             ballPreview.classList.forEach( (classListElement:string) => ballPreview.classList.remove(classListElement) )
             ballPreview.classList.add('ball');
-            ballPreview.classList.add(Colors[i]);
+            // console.log(ballPreview)
+            ballPreview.classList.add(Colors[Colors[this._state[i]]]);
         })
     }
 }

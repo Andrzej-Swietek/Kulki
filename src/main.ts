@@ -35,6 +35,7 @@ class Game {
             while (field.state !== Colors.EMPTY)
                 field = this.board.Graph[randomNumber(0,10)][randomNumber(0,10)];
 
+            console.log(field.state == Colors.EMPTY)
             field.insertBall( ball )
         })
     }
@@ -42,11 +43,28 @@ class Game {
         this.nextThree.drawNewBalls();
         this.putBalls( this.nextThree.state );
         this.nextThree.drawNewBalls();
-        // shortestPath( this.board.Graph, store.target, this.board.Graph[8][1] )
+
+        document.body.addEventListener('place-ball', ()=> {
+            this.putBalls( this.nextThree.state );
+            this.nextThree.drawNewBalls();
+            this.checkIfEnd()
+        })
+        // shortestPath(this.board.Graph,this.board.Graph[0][0],this.board.Graph[7][4])
+    }
+
+    public checkIfEnd() {
+        let count:number = 0;
+        this.board.Graph.forEach(
+            arr => arr.forEach(
+                (box: GraphNode)=> (box.state === Colors.EMPTY) && count++
+            ))
+
+        if ( count <= 0 ) alert( 'GAME OVER' )
     }
 
 }
 document.addEventListener('DOMContentLoaded', ()=>{
+    localStorage.setItem("selected", "")
     const game: Game = new Game();
     game.start();
 })

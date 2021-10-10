@@ -21,6 +21,7 @@ export class Board extends HTMLComponent{
             const list: GraphNode[] = [];
             for (let j = 0; j < 10; j++) {
                 const node = new GraphNode(j,i, Colors.EMPTY)
+                node.id = ((i)+"-"+(j)).toString()
                 document.querySelector('#mainGrid').appendChild(node)
                 list.push(node);
             }
