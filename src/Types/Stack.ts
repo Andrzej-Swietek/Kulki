@@ -17,6 +17,7 @@ interface IStack<T> {
  * stack.size(); // Output: 2
  * stack.pop();  // Output: "B"
  * stack.size(); // Output: 1
+ * ```
  * @typeParam T - Type of objects the Stack contains
  */
 export class Stack<T> implements IStack<T> {

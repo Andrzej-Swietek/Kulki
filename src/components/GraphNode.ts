@@ -11,7 +11,6 @@ import {placeEvent} from "../Events";
  * Class that represents a single tile on a board, which is equivalent to a Graph Node In Path finding Algorithm
  * @decorator `@UIComponent`
  */
-
 @UIComponent({
     selector: `graph-node`,
     template: ` <div class="ball"></div>  `,
@@ -24,6 +23,14 @@ export class GraphNode extends HTMLComponent{
     public parentGraphNode : GraphNode | null = null;
     public distance: number = -1;
     public isStarting: boolean = false;
+
+    /**
+     * Initialise Graph Node values and add event listeners for click, mouseover and mouse leave
+     * @constructor
+     * @param x: number - Node x position
+     * @param y: number - Node Y position
+     * @param state: Color - Node color/Empty
+     */
     constructor(x, y,state) {
         super();
         this.x = x;
@@ -88,6 +95,10 @@ export class GraphNode extends HTMLComponent{
         }
     }
 
+    /**
+     * Function that leaves the mark of the shortest path for given time and then removes it
+     * @static
+     */
     static markPathForGranted(){
         document.querySelectorAll<GraphNode>('.path').forEach( item => item.classList.add('path2'))
         setTimeout( () => {
@@ -95,6 +106,9 @@ export class GraphNode extends HTMLComponent{
         },800 )
     }
 
+    /**
+     * Method that resets all values ( classList, child, state, visited, parentGraphNode, distance )  of node
+     */
     emptyNode() {
         this.state = Colors.EMPTY;
         this.removeChild(this.querySelector('.ball'))
@@ -105,17 +119,33 @@ export class GraphNode extends HTMLComponent{
         this.distance = -1;
     }
 
+    /**
+     * Method responsible for inserting ball to the field action
+     * @param color - Color of inserted ball
+     */
     insertBall(color: Colors) {
         // console.log(color)
         this.state = color;
         this.children[0].classList.add( color.toString() )
     }
+
+    /**
+     * Method ment for adding selected graph node to the shortest path by adding visual ".path" class to graph node class list
+     */
     colorField() {
         this.classList.add('path');
     }
+
+    /**
+     * Method that finds usage in shortest path algorithm - marks the node as already visited
+     */
     visit(){
         this.visited = true;
     }
+
+    /**
+     * Method that purpose is cleaning shortest path from graph nodes along with all values like distance parent node
+     */
     unvisit() {
         this.visited = false;
         this.classList.remove('path');

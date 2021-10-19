@@ -2,6 +2,17 @@ import {GraphNode} from "../components/GraphNode";
 import {Queue} from "../Types/Queue";
 import {Colors} from "../enums/Colors";
 
+/**
+ * Function that finds the shortest path in between 2 points in the graph
+ * @param graph
+ * @param startPoint
+ * @param endPoint
+ * @example
+ * ```ts
+ * // Shortest Path from point (0,0) to (4,7)
+ * shortestPath(this.board.Graph,this.board.Graph[0][0],this.board.Graph[7][4])
+ * ```
+ */
 export const shortestPath = (graph: Array<GraphNode[]>, startPoint: GraphNode, endPoint: GraphNode) => {
     BFS(graph, startPoint, endPoint);
     let V: GraphNode = endPoint;
@@ -12,6 +23,14 @@ export const shortestPath = (graph: Array<GraphNode[]>, startPoint: GraphNode, e
     }
     startPoint.colorField()
 }
+
+/**
+ * BFS Algorithm
+ * @param graph - Graph in 2D Array form
+ * @param startPoint - Point in the graph where BFS starts from
+ * @param endPoint - Point in the graph where BFS is trying to get to
+ * @constructor
+ */
 const BFS = (graph: Array<GraphNode[]>, startPoint: GraphNode, endPoint: GraphNode) => {
     const Q = new Queue<GraphNode>();
     Q.push( startPoint );

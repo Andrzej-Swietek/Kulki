@@ -23,6 +23,10 @@ import {PointsCounter} from "./PointsCounter";
 export class Board extends HTMLComponent{
 
     public Graph : Array<GraphNode[]> = []
+
+    /**
+     * Method that generates all board elements
+     */
     public generateBoardElement(): void {
         for (let i = 0; i < 10; i++) {
 
@@ -38,6 +42,7 @@ export class Board extends HTMLComponent{
     }
 
     /**
+     * Function that captures balls in row
      * 1st step: 3 in row or in column of the same color
      * 2nd step: go forward till empty field or different color
      * 3rd step: Recursivly up and down or left and right
@@ -71,7 +76,7 @@ export class Board extends HTMLComponent{
             (arr.length > 1) && console.log(x,y,isNBallsValid, arr);
             const pointCounter = (query`component-points-counter` as PointsCounter);
             (arr.length >= 3 ) && (pointCounter.updatePoints(pointCounter.numPoints+arr.length))
-            console.log(pointCounter.numPoints)
+
 
         }
 

@@ -20,7 +20,8 @@
     "dev": "webpack --mode development",
     "prod": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "go": "webpack --mode development && webpack serve --open"
+    "go": "webpack --mode development && webpack serve --open",
+    "docs": "npx typedoc --entryPointStrategy expand ./src"
   },
   "main": "index.js",
   "author": "Andrzej Świętek",

@@ -1,6 +1,10 @@
 import { UIComponent } from "../decorators/UIComponent";
-import {LifeCycle} from "../interfaces/LifeCycle";
-import {HTMLComponent} from "../HTMLComponent";
+import { LifeCycle } from "../interfaces/LifeCycle";
+import { HTMLComponent } from "../HTMLComponent";
+
+/**
+ * Class responsible for counting players points and displaying it oon the screen
+ */
 
 @UIComponent({
     selector: 'component-points-counter',
@@ -22,11 +26,19 @@ export class PointsCounter extends HTMLComponent implements LifeCycle {
         console.log('connected callback');
     }
 
+    /**
+     * Method that updates both abstract value and value on the screen
+     * @param points - New points value
+     */
     public updatePoints(points: number=0): void {
         this.points = points;
         this.pointsHtmlRef.innerHTML = `<p> <span>${ this.points }</span> Points </p>`
     }
 
+    /**
+     * Method that returns player points number
+     * @return - Current points amount
+     */
     get numPoints() {
         return this.points;
     }

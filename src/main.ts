@@ -10,7 +10,9 @@ import {GraphNode} from "./components/GraphNode";
 import {store} from "./store";
 
 
-
+/**
+ * Main class responsible for creating game, starting it and checking for endgame
+ */
 class Game {
     private pointsCounter: PointsCounter;
     private nextThree: NextThree;
@@ -39,6 +41,10 @@ class Game {
             field.insertBall( ball )
         })
     }
+
+    /**
+     * Method that starts game
+     */
     public start() {
         this.nextThree.drawNewBalls();
         this.putBalls( this.nextThree.state );
@@ -53,6 +59,9 @@ class Game {
         // shortestPath(this.board.Graph,this.board.Graph[0][0],this.board.Graph[7][4])
     }
 
+    /**
+     * Method that checks if game is over
+     */
     public checkIfEnd() {
         let count:number = 0;
         this.board.Graph.forEach(

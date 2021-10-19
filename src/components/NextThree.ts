@@ -1,11 +1,16 @@
 import { UIComponent } from "../decorators/UIComponent";
 import BallsGenerator from "../BallsGenerator";
-import {create, query, queryAll} from "../utils/domQuery";
+import { create, query, queryAll } from "../utils/domQuery";
 import { Colors } from "../enums/Colors";
 import { LifeCycle } from "../interfaces/LifeCycle";
 import { HTMLComponent } from "../HTMLComponent";
 import { Log } from "../decorators/Log";
 import {GraphNode} from "./GraphNode";
+
+/**
+ * Class responsible for generating new random ball and displaying the preview of next 3
+ * @decorator UIComponent
+ */
 
 @UIComponent({
     selector: 'component-next-three',
@@ -31,10 +36,19 @@ export class NextThree extends HTMLComponent implements LifeCycle{
         })
     }
 
+    /**
+     * Method that returns next balls for the moment
+     * @return state - colors of next 3 balls
+     */
     get state(): Array<Colors> {
         return this._state;
     }
 
+
+    /**
+     * Method that updates the displayed colors of next 3 balls
+     * @decorator Log
+     */
     @Log
     public drawNewBalls() {
         this._state = this.ballsGenerator.getNextBalls().value

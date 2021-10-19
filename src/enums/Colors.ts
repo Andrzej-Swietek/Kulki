@@ -1,5 +1,6 @@
 /**
  * Balls Color Enumerate
+ * @enum
  */
 export enum Colors {
     RED,
