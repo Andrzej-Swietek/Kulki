@@ -48,6 +48,7 @@ class Game {
             this.putBalls( this.nextThree.state );
             this.nextThree.drawNewBalls();
             this.checkIfEnd()
+            this.board.captureBalls();
         })
         // shortestPath(this.board.Graph,this.board.Graph[0][0],this.board.Graph[7][4])
     }

@@ -8,11 +8,12 @@
     "webpack-cli": "^4.1.0"
   },
   "devDependencies": {
+    "css-loader": "^5.2.1",
     "sass": "^1.38.0",
     "sass-loader": "^12.1.0",
     "style-loader": "^2.0.0",
-    "css-loader": "^5.2.1",
     "ts-loader": "^8.0.6",
+    "typedoc": "^0.22.6",
     "webpack": "^5.50.0"
   },
   "scripts": {

@@ -1,4 +1,11 @@
-export class Queue<T> {
+ /**
+  * Class representing abstract data structure: Queue (FIFO)
+  * @example
+  * const Q = new Queue<GraphNode>();
+  * Q.push( startPoint );
+  * @typeParam T - Type of objects the Queue contains
+  */
+ export class Queue<T> {
     _store: T[] = [];
     push(val: T) {
         this._store.push(val);

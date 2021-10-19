@@ -12,7 +12,6 @@ export const shortestPath = (graph: Array<GraphNode[]>, startPoint: GraphNode, e
     }
     startPoint.colorField()
 }
-
 const BFS = (graph: Array<GraphNode[]>, startPoint: GraphNode, endPoint: GraphNode) => {
     const Q = new Queue<GraphNode>();
     Q.push( startPoint );

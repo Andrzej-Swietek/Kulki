@@ -22,9 +22,13 @@ export class PointsCounter extends HTMLComponent implements LifeCycle {
         console.log('connected callback');
     }
 
-    private updatePoints(points: number=0): void {
+    public updatePoints(points: number=0): void {
         this.points = points;
         this.pointsHtmlRef.innerHTML = `<p> <span>${ this.points }</span> Points </p>`
+    }
+
+    get numPoints() {
+        return this.points;
     }
 
     disconnectedCallback() {

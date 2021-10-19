@@ -15,7 +15,7 @@ export function queryAll(strings, ...values): NodeList {
  * @param strings
  * @param values
  */
-export function query(strings, ...values): HTMLElement{
+export function query(strings, ...values): HTMLElement {
     const string = values.reduce( (finalString, value, index) => {
         return `${finalString}${value}${strings[index + 1]}`
     }, strings[0])

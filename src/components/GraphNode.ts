@@ -7,6 +7,11 @@ import {Board} from "./Board";
 import {create, query, queryAll} from "../utils/domQuery";
 import {placeEvent} from "../Events";
 
+/**
+ * Class that represents a single tile on a board, which is equivalent to a Graph Node In Path finding Algorithm
+ * @decorator `@UIComponent`
+ */
+
 @UIComponent({
     selector: `graph-node`,
     template: ` <div class="ball"></div>  `,
@@ -25,7 +30,7 @@ export class GraphNode extends HTMLComponent{
         this.y = y;
         this.state = state;
 
-        this.onmouseover = () => {
+        this.onmouseover = async () => {
             this.parentNode.querySelectorAll('.ball')
                 .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.unvisit());
                 // .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.classList.remove('path'));
@@ -44,41 +49,50 @@ export class GraphNode extends HTMLComponent{
                 // .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.classList.remove('path'));
         }
 
-        this.onclick = () => {
+        this.onclick = async () => {
             console.log('click', store.target);
-            const startPoint: GraphNode|null = (document.getElementById(localStorage.getItem("selected")) as GraphNode)
-            if ( this === startPoint) {
+            const startPoint: GraphNode | null = (document.getElementById(localStorage.getItem("selected")) as GraphNode)
+            if (this === startPoint) {
                 this.isStarting = false
                 // store.target = null
                 setStore(null)
-            }
-            else if (this.state != Colors.EMPTY) {
+            } else if (this.state != Colors.EMPTY) {
                 // store.target = this;
                 setStore(this)
                 this.isStarting = true
                 console.log('after click', store.target);
-            }
-
-            else {
+            } else {
                 // if ( localStorage.getItem("selected")!="" ){
-                    type ColorsString = keyof typeof Colors;
-                    // const x: Colors | undefined =  store.target?.state
-                    const x = (document.getElementById(localStorage.getItem("selected")) as GraphNode).state;
-                    console.log( Colors[Colors[x]], store.target?.state );
+                type ColorsString = keyof typeof Colors;
+                // const x: Colors | undefined =  store.target?.state
+                const x = (document.getElementById(localStorage.getItem("selected")) as GraphNode).state;
+                // console.log( Colors[Colors[x]], store.target?.state );
 
-                    this.insertBall( Colors[Colors[x]] );
-                    // store.target.emptyNode();
-                    // store.target = null;
-                    (document.getElementById(localStorage.getItem("selected")) as GraphNode ).emptyNode();
-                    setStore(null);
+                this.insertBall(Colors[Colors[x]]);
 
-                    document.querySelectorAll('.path')
-                        .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.unvisit());
+                (document.getElementById(localStorage.getItem("selected")) as GraphNode).emptyNode();
+                setStore(null);
+                GraphNode.markPathForGranted();
+                let oldOnMouseOver = this.onmouseover;
+                this.onmouseover = () => {};
+                await setTimeout(() => this.onmouseover = oldOnMouseOver, 1000)
+                document.querySelectorAll('.path')
+                    .forEach((field: GraphNode) => (field.classList.contains('path')) && field.unvisit());
 
-                    document.body.dispatchEvent(placeEvent)
+
+
+                document.body.dispatchEvent(placeEvent)
+
                 // }
             }
         }
+    }
+
+    static markPathForGranted(){
+        document.querySelectorAll<GraphNode>('.path').forEach( item => item.classList.add('path2'))
+        setTimeout( () => {
+            document.querySelectorAll<GraphNode>('.path2').forEach( item => item.classList.remove('path2'))
+        },800 )
     }
 
     emptyNode() {
@@ -107,8 +121,6 @@ export class GraphNode extends HTMLComponent{
         this.classList.remove('path');
         this.parentGraphNode = null;
         this.distance = -1;
-
-        console.log('x')
     }
 
 }
