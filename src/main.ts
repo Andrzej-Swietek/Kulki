@@ -55,6 +55,18 @@ class Game {
             this.nextThree.drawNewBalls();
             this.checkIfEnd()
             this.board.captureBalls();
+            // this.board.Graph.forEach( (row) => (row.forEach( node => (node.visited) && (node.visited = false) )))
+            this.board.forEachNode( (node: GraphNode)=> {
+                (node.visited) && (node.visited = false);
+                (node.parentGraphNode) && (node.parentGraphNode = null);
+                (node.distance > 0) && (node.distance = -1);
+                (node.isStarting) && (node.isStarting = false)
+            })
+
+            this.board.forEachNode( (node: GraphNode)=> {
+                (node.distance > 0 || node.visited || node.parentGraphNode) && (node.style.background="red")
+            })
+            localStorage.setItem("selected", "")
         })
         // shortestPath(this.board.Graph,this.board.Graph[0][0],this.board.Graph[7][4])
     }
@@ -64,12 +76,11 @@ class Game {
      */
     public checkIfEnd() {
         let count:number = 0;
-        this.board.Graph.forEach(
-            arr => arr.forEach(
+        this.board.Graph.forEach(arr => arr.forEach(
                 (box: GraphNode)=> (box.state === Colors.EMPTY) && count++
             ))
 
-        if ( count <= 0 ) alert( 'GAME OVER' )
+        if ( count <= 0 ) alert( 'GAME OVER, YOU WON A CHANCE TOO START OVER AGAIN' )
     }
 
 }
@@ -78,6 +89,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const game: Game = new Game();
     game.start();
 })
-
-
 

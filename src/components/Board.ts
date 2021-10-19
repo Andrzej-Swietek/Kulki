@@ -41,6 +41,10 @@ export class Board extends HTMLComponent{
         }
     }
 
+    public forEachNode(callback):void {
+        this.Graph.forEach( (row) => (row.forEach( node => callback(node) )))
+    }
+
     /**
      * Function that captures balls in row
      * 1st step: 3 in row or in column of the same color
