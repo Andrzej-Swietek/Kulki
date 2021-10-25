@@ -38,19 +38,19 @@ export class GraphNode extends HTMLComponent{
         this.state = state;
 
         this.onmouseover = async () => {
+
             this.parentNode.querySelectorAll('.ball')
                 .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.unvisit());
                 // .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.classList.remove('path'));
 
-            // if ( store.target ){
             if ( localStorage.getItem("selected") != "" ){
                 const board: Board = query`component-board` as Board;
                 shortestPath( board.Graph, document.getElementById(localStorage.getItem("selected")) as GraphNode, this )
-                // shortestPath( board.Graph, store.target, this )
             }
 
         }
         this.onmouseleave = () => {
+
             document.querySelectorAll('.path')
                 .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.unvisit());
                 // .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.classList.remove('path'));
@@ -72,23 +72,25 @@ export class GraphNode extends HTMLComponent{
                 // if ( localStorage.getItem("selected")!="" ){
                 type ColorsString = keyof typeof Colors;
                 // const x: Colors | undefined =  store.target?.state
-                const x = (document.getElementById(localStorage.getItem("selected")) as GraphNode).state;
+                const x = (document.getElementById(localStorage.getItem("selected")) as GraphNode)?.state;
                 // console.log( Colors[Colors[x]], store.target?.state );
+                if ( x ) {
+                    this.insertBall(Colors[Colors[x]]);
 
-                this.insertBall(Colors[Colors[x]]);
+                    (document.getElementById(localStorage.getItem("selected")) as GraphNode).emptyNode();
+                    setStore(null);
+                    GraphNode.markPathForGranted();
+                    let oldOnMouseOver = this.onmouseover;
+                    this.onmouseover = () => {};
+                    await setTimeout(() => this.onmouseover = oldOnMouseOver, 1000)
+                    document.querySelectorAll('.path')
+                        .forEach((field: GraphNode) => (field.classList.contains('path')) && field.unvisit());
 
-                (document.getElementById(localStorage.getItem("selected")) as GraphNode).emptyNode();
-                setStore(null);
-                GraphNode.markPathForGranted();
-                let oldOnMouseOver = this.onmouseover;
-                this.onmouseover = () => {};
-                await setTimeout(() => this.onmouseover = oldOnMouseOver, 1000)
-                document.querySelectorAll('.path')
-                    .forEach((field: GraphNode) => (field.classList.contains('path')) && field.unvisit());
+                    document.body.dispatchEvent(placeEvent)
+                }
 
 
 
-                document.body.dispatchEvent(placeEvent)
 
                 // }
             }
@@ -151,6 +153,7 @@ export class GraphNode extends HTMLComponent{
         this.classList.remove('path');
         this.parentGraphNode = null;
         this.distance = -1;
+        // this.state = Colors.EMPTY;
     }
 
 }

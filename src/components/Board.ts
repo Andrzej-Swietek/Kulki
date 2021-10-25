@@ -79,7 +79,8 @@ export class Board extends HTMLComponent{
 
             (arr.length > 1) && console.log(x,y,isNBallsValid, arr);
             const pointCounter = (query`component-points-counter` as PointsCounter);
-            (arr.length >= 3 ) && (pointCounter.updatePoints(pointCounter.numPoints+arr.length))
+            (arr.length >= 3 ) && (pointCounter.updatePoints(pointCounter.numPoints+arr.length));
+            (arr.length >= 3 ) && arr.forEach( (node: GraphNode) => node.emptyNode())
 
 
         }

@@ -22,6 +22,7 @@ export const shortestPath = (graph: Array<GraphNode[]>, startPoint: GraphNode, e
         V = V.parentGraphNode;
     }
     startPoint.colorField()
+    // graph.forEach( row=> row.forEach( node => node.unvisit() ) )
 }
 
 /**
@@ -35,40 +36,68 @@ const BFS = (graph: Array<GraphNode[]>, startPoint: GraphNode, endPoint: GraphNo
     const Q = new Queue<GraphNode>();
     Q.push( startPoint );
     startPoint.distance = 0;
-    startPoint.visit()
+    startPoint.visit();
     while (!Q.empty()) {
         const u: GraphNode = Q.pop();
         if ( u.x - 1  >= 0 && !graph[ u.y ][ u.x -1 ].visited && graph[ u.y ][ u.x -1].state == Colors.EMPTY){
+            /**
+             * LEFT NEIGHBOUR
+             */
             const V = graph[ u.y ][ u.x -1 ];
             V.distance = u.distance+1;
-            Q.push( V )
+            Q.push( V );
             V.parentGraphNode = u;
-            V.visit()
-            if (V.x == endPoint.x && V.y == endPoint.y ) break;
+            V.visit();
+            // V.style.background = "tomato";
+            if (V.x == endPoint.x && V.y == endPoint.y ) {
+                // startPoint.unvisit();
+                // break;
+            };
         }
         if ( u.x + 1  < 10 && !graph[ u.y ][ u.x + 1 ].visited && graph[ u.y ][ u.x +1 ].state == Colors.EMPTY){
+            /**
+             * RIGHT NEIGHBOUR
+             */
             const V = graph[ u.y ][ u.x + 1 ];
             V.distance = u.distance+1;
-            Q.push( V )
+            Q.push( V );
             V.parentGraphNode = u;
-            V.visit()
-            if (V.x == endPoint.x && V.y == endPoint.y ) break;
+            V.visit();
+            // V.style.background = "tomato";
+            if (V.x == endPoint.x && V.y == endPoint.y ) {
+                // startPoint.unvisit();
+                // break;
+            };
         }
         if ( u.y - 1  >= 0 && !graph[ u.y -1][ u.x ].visited && graph[ u.y -1 ][ u.x ].state == Colors.EMPTY){
+            /**
+             * LOWER NEIGHBOUR
+             */
             const V = graph[ u.y -1][ u.x ];
             V.distance = u.distance+1;
-            Q.push( V )
+            Q.push( V );
             V.parentGraphNode = u;
-            V.visit()
-            if (V.x == endPoint.x && V.y == endPoint.y ) break;
+            V.visit();
+            // V.style.background = "tomato";
+            if (V.x == endPoint.x && V.y == endPoint.y ) {
+                // startPoint.unvisit();
+                // break;
+            };
         }
         if ( u.y + 1 < 10 && !graph[ u.y +1][ u.x ].visited && graph[ u.y +1 ][ u.x ].state == Colors.EMPTY){
+            /**
+             * TOP NEIGHBOUR
+             */
             const V = graph[ u.y +1][ u.x ];
             V.distance = u.distance+1;
-            Q.push( V )
+            Q.push( V );
             V.parentGraphNode = u;
-            V.visit()
-            if (V.x == endPoint.x && V.y == endPoint.y ) break;
+            V.visit();
+            // V.style.background = "tomato";
+            if (V.x == endPoint.x && V.y == endPoint.y ) {
+                // startPoint.unvisit();
+                // break;
+            };
         }
 
     }

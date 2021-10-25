@@ -37,7 +37,7 @@ class Game {
             while (field.state !== Colors.EMPTY)
                 field = this.board.Graph[randomNumber(0,10)][randomNumber(0,10)];
 
-            console.log(field.state == Colors.EMPTY)
+            // console.log(field.state == Colors.EMPTY)
             field.insertBall( ball )
         })
     }
@@ -60,10 +60,11 @@ class Game {
                 (node.visited) && (node.visited = false);
                 (node.parentGraphNode) && (node.parentGraphNode = null);
                 (node.distance > 0) && (node.distance = -1);
-                (node.isStarting) && (node.isStarting = false)
+                (node.isStarting) && (node.isStarting = false);
             })
 
             this.board.forEachNode( (node: GraphNode)=> {
+                if ( node.visited || node.state != Colors.EMPTY ) node.style.background="purple";
                 (node.distance > 0 || node.visited || node.parentGraphNode) && (node.style.background="red")
             })
             localStorage.setItem("selected", "")
