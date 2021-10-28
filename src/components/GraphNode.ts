@@ -60,6 +60,7 @@ export class GraphNode extends HTMLComponent{
         }
 
         this.onclick = async () => {
+
             console.log('click', store.target);
             const startPoint: GraphNode | null = (document.getElementById(localStorage.getItem("selected")) as GraphNode)
             if (this === startPoint) {
@@ -72,12 +73,11 @@ export class GraphNode extends HTMLComponent{
                 this.isStarting = true
                 console.log('after click', store.target);
             } else {
-                // if ( localStorage.getItem("selected")!="" ){
                 type ColorsString = keyof typeof Colors;
-                // const x: Colors | undefined =  store.target?.state
                 const x = (document.getElementById(localStorage.getItem("selected")) as GraphNode)?.state;
-
-                if ( x ) {
+                // alert(  document.querySelectorAll<GraphNode>('.path').length )
+                if ( document.querySelectorAll<GraphNode>('.path').length == 2 && this.parentGraphNode.id !== (document.getElementById(localStorage.getItem("selected")) as GraphNode).id ) {}
+                else if ( x ) {
                     this.insertBall(Colors[Colors[x]]);
 
                     (document.getElementById(localStorage.getItem("selected")) as GraphNode).emptyNode();
@@ -98,10 +98,6 @@ export class GraphNode extends HTMLComponent{
                     document.body.dispatchEvent(placeEvent)
                 }
 
-
-
-
-                // }
             }
         }
     }
