@@ -79,10 +79,10 @@ class Game {
     public checkIfEnd() {
         let count:number = 0;
         this.board.Graph.forEach(arr => arr.forEach(
-                (box: GraphNode)=> (box.state === Colors.EMPTY) && count++
+                (box: GraphNode)=> (box.state === Colors.EMPTY) && (count++)
             ))
 
-        if ( count <= 0 ) alert( 'GAME OVER, YOU WON A CHANCE TOO START OVER AGAIN' )
+        if ( count <= 2 ) alert( 'GAME OVER, YOU WON A CHANCE TOO START OVER AGAIN' )
     }
 
 }

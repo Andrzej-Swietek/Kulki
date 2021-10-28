@@ -7,6 +7,7 @@ import {Board} from "./Board";
 import {create, query, queryAll} from "../utils/domQuery";
 import {placeEvent} from "../Events";
 import {DFS} from "../algorithms/DFS";
+import {PointsCounter} from "./PointsCounter";
 
 /**
  * Class that represents a single tile on a board, which is equivalent to a Graph Node In Path finding Algorithm
@@ -94,6 +95,8 @@ export class GraphNode extends HTMLComponent{
                     const board: Board = query`component-board` as Board;
                     const toCapture: GraphNode[] = DFS(board.Graph, this);
                     console.log( toCapture )
+                    const pointCounter= document.querySelector<PointsCounter>('component-points-counter');
+                    pointCounter.updatePoints( pointCounter.numPoints + toCapture.length );
                     toCapture.forEach( node => node.style.background = 'yellow' )
                     document.body.dispatchEvent(placeEvent)
                 }
