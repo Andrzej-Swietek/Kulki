@@ -61,10 +61,11 @@ class Game {
                 (node.parentGraphNode) && (node.parentGraphNode = null);
                 (node.distance > 0) && (node.distance = -1);
                 (node.isStarting) && (node.isStarting = false);
+                node.dfsVisited = false;
             })
 
             this.board.forEachNode( (node: GraphNode)=> {
-                if ( node.visited || node.state != Colors.EMPTY ) node.style.background="purple";
+                // if ( node.visited || node.state != Colors.EMPTY ) node.style.background="purple";
                 (node.distance > 0 || node.visited || node.parentGraphNode) && (node.style.background="red")
             })
             localStorage.setItem("selected", "")

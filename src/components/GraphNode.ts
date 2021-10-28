@@ -6,6 +6,7 @@ import {shortestPath} from "../algorithms/ShortestPath";
 import {Board} from "./Board";
 import {create, query, queryAll} from "../utils/domQuery";
 import {placeEvent} from "../Events";
+import {DFS} from "../algorithms/DFS";
 
 /**
  * Class that represents a single tile on a board, which is equivalent to a Graph Node In Path finding Algorithm
@@ -23,6 +24,8 @@ export class GraphNode extends HTMLComponent{
     public parentGraphNode : GraphNode | null = null;
     public distance: number = -1;
     public isStarting: boolean = false;
+
+    public dfsVisited: boolean = false;
 
     /**
      * Initialise Graph Node values and add event listeners for click, mouseover and mouse leave
@@ -53,7 +56,7 @@ export class GraphNode extends HTMLComponent{
 
             document.querySelectorAll('.path')
                 .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.unvisit());
-                // .forEach( (field:GraphNode) => (field.classList.contains('path')) && field.classList.remove('path'));
+
         }
 
         this.onclick = async () => {
@@ -73,7 +76,7 @@ export class GraphNode extends HTMLComponent{
                 type ColorsString = keyof typeof Colors;
                 // const x: Colors | undefined =  store.target?.state
                 const x = (document.getElementById(localStorage.getItem("selected")) as GraphNode)?.state;
-                // console.log( Colors[Colors[x]], store.target?.state );
+
                 if ( x ) {
                     this.insertBall(Colors[Colors[x]]);
 
@@ -86,6 +89,12 @@ export class GraphNode extends HTMLComponent{
                     document.querySelectorAll('.path')
                         .forEach((field: GraphNode) => (field.classList.contains('path')) && field.unvisit());
 
+
+                    // ZBIJAM
+                    const board: Board = query`component-board` as Board;
+                    const toCapture: GraphNode[] = DFS(board.Graph, this);
+                    console.log( toCapture )
+                    toCapture.forEach( node => node.style.background = 'yellow' )
                     document.body.dispatchEvent(placeEvent)
                 }
 

@@ -54,46 +54,47 @@ export class Board extends HTMLComponent{
     public captureBalls() {
         console.log("%c ZBIJANKO", 'color: red')
         const requiredToCapture:number = 3;
-        const stackToCapture = new Stack<GraphNode>();
+        // const stackToCapture = new Stack<GraphNode>();
+        //
+        // const capture = ( x:number, y:number, color: Colors, counter:number, direction: 'H'|'V' ) => {
+        //     if ( x > 9 || y > 9 ) return;
+        //     // const node = this.Graph[y][x] as GraphNode;
+        //     // console.log(counter, node)
+        //     // if ( node.state == Colors.EMPTY ) return false;
+        //     // if( node.state != color && counter > requiredToCapture) return true;
+        //     // else if (node.state != color && counter >= requiredToCapture) return false;
+        //     // else if (node.state == color)  {
+        //     //     stackToCapture.push(node);
+        //     //     if (direction == 'V') capture( x,y+1, color, counter+1, 'V'  )
+        //     //     if (direction == 'H') capture( x+1,y, color, counter+1, 'H'  )
+        //     // }
+        //     let arr = []
+        //     let isNBallsValid: boolean = true;
+        //     let parameter:number = (direction=='H')? x : y;
+        //     for ( let i = parameter ; (i < parameter + requiredToCapture && i <= 9); i++ ){
+        //         const node = (direction == 'H')? this.Graph[y][i] as GraphNode : this.Graph[i][x] as GraphNode;
+        //         if ( node.state != color || node.state == Colors.EMPTY ) { isNBallsValid = false; break; }
+        //         else arr.push(node)
+        //     }
+        //
+        //     (arr.length > 1) && console.log(x,y,isNBallsValid, arr);
+        //     const pointCounter = (query`component-points-counter` as PointsCounter);
+        //     (arr.length >= 3 ) && (pointCounter.updatePoints(pointCounter.numPoints+arr.length));
+        //     (arr.length >= 3 ) && arr.forEach( (node: GraphNode) => node.emptyNode())
+        //
+        //
+        // }
+        //
+        // this.Graph.forEach( (col,y)=> {
+        //     col.forEach( (node,x) => { capture(x,y, node.state ,0,'V');capture(x,y, node.state ,0,'H'); } )
+        //     // while ( stackToCapture.size() ) {
+        //         // stackToCapture.pop()
+        //     // }
+        // })
+        // // capture(0,0, (this.Graph[0][0] as GraphNode).state ,0,'V')
+        // // w petli wywołuje i czyszcze stosik
+        // console.log( stackToCapture )
 
-        const capture = ( x:number, y:number, color: Colors, counter:number, direction: 'H'|'V' ) => {
-            if ( x > 9 || y > 9 ) return;
-            // const node = this.Graph[y][x] as GraphNode;
-            // console.log(counter, node)
-            // if ( node.state == Colors.EMPTY ) return false;
-            // if( node.state != color && counter > requiredToCapture) return true;
-            // else if (node.state != color && counter >= requiredToCapture) return false;
-            // else if (node.state == color)  {
-            //     stackToCapture.push(node);
-            //     if (direction == 'V') capture( x,y+1, color, counter+1, 'V'  )
-            //     if (direction == 'H') capture( x+1,y, color, counter+1, 'H'  )
-            // }
-            let arr = []
-            let isNBallsValid: boolean = true;
-            let parameter:number = (direction=='H')? x : y;
-            for ( let i = parameter ; (i < parameter + requiredToCapture && i <= 9); i++ ){
-                const node = (direction == 'H')? this.Graph[y][i] as GraphNode : this.Graph[i][x] as GraphNode;
-                if ( node.state != color || node.state == Colors.EMPTY ) { isNBallsValid = false; break; }
-                else arr.push(node)
-            }
-
-            (arr.length > 1) && console.log(x,y,isNBallsValid, arr);
-            const pointCounter = (query`component-points-counter` as PointsCounter);
-            (arr.length >= 3 ) && (pointCounter.updatePoints(pointCounter.numPoints+arr.length));
-            (arr.length >= 3 ) && arr.forEach( (node: GraphNode) => node.emptyNode())
-
-
-        }
-
-        this.Graph.forEach( (col,y)=> {
-            col.forEach( (node,x) => { capture(x,y, node.state ,0,'V');capture(x,y, node.state ,0,'H'); } )
-            // while ( stackToCapture.size() ) {
-                // stackToCapture.pop()
-            // }
-        })
-        // capture(0,0, (this.Graph[0][0] as GraphNode).state ,0,'V')
-        // w petli wywołuje i czyszcze stosik
-        console.log( stackToCapture )
-
+        
     }
 }
