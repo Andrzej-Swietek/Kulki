@@ -97,7 +97,8 @@ export class GraphNode extends HTMLComponent{
                     console.log( toCapture )
                     const pointCounter= document.querySelector<PointsCounter>('component-points-counter');
                     pointCounter.updatePoints( pointCounter.numPoints + toCapture.length );
-                    toCapture.forEach( node => node.style.background = 'yellow' )
+                    // toCapture.forEach( node => node.style.background = 'yellow' )
+                    toCapture.forEach( node => node.emptyNode() )
                     document.body.dispatchEvent(placeEvent)
                 }
 

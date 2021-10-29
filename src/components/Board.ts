@@ -41,7 +41,7 @@ export class Board extends HTMLComponent{
         }
     }
 
-    public forEachNode(callback):void {
+    public forEachNode(callback:Function):void {
         this.Graph.forEach( (row) => (row.forEach( node => callback(node) )))
     }
 
@@ -95,6 +95,6 @@ export class Board extends HTMLComponent{
         // // w petli wywołuje i czyszcze stosik
         // console.log( stackToCapture )
 
-        
+
     }
 }

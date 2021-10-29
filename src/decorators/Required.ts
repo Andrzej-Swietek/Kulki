@@ -1,4 +1,4 @@
-export const Required = (target, key, index) => {
+export const Required = (target, key, index ) => {
     const tableIndex = `${key}_arguments`
     if (Array.isArray(target[tableIndex])) {
         target[tableIndex].push(index);

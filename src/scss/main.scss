@@ -35,5 +35,42 @@ body {
   padding: 1rem;
 }
 
+component-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: lighten(rgba($bg,.4), 10%);
+  backdrop-filter: blur(25px);
+  @include flex(row, wrap);
+}
+.popupContent {
+  @include flex(row, wrap);
+  width: 60%;
+  height: 50vh;
+  background: lighten(rgba($bg,.4), 50%);
+  backdrop-filter: blur(25px);
+  border-radius: 45px;
+  color: #fff;
+  padding: 2rem;
+  h1 {
+    width: 100%;
+    text-align: center;
+  }
+  h2 {
+    width: 100%;
+    text-align: center;
+  }
+}
+.gameoverText {
+  font-size: 3rem !important;
+  margin-block: 2rem;
+  color: #ff0077;
+}
 
-
+.scorePointsPoopup{
+  font-size: 3rem !important;
+  margin-block: 2rem;
+  color: #00ff90;
+}

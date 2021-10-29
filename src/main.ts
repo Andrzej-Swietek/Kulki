@@ -8,6 +8,7 @@ import {query} from "./utils/domQuery";
 import {randomNumber} from "./utils/random";
 import {GraphNode} from "./components/GraphNode";
 import {store} from "./store";
+import Popup from "./components/Popup";
 
 
 /**
@@ -82,7 +83,11 @@ class Game {
                 (box: GraphNode)=> (box.state === Colors.EMPTY) && (count++)
             ))
 
-        if ( count <= 2 ) alert( 'GAME OVER, YOU WON A CHANCE TOO START OVER AGAIN' )
+        if ( count <= 2 ){
+            // alert( 'GAME OVER, YOU WON A CHANCE TOO START OVER AGAIN' )
+            const popup = new Popup(this.pointsCounter.numPoints);
+            popup.mount(document.body);
+        }
     }
 
 }
