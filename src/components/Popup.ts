@@ -2,6 +2,15 @@ import { UIComponent } from "../decorators/UIComponent";
 import { HTMLComponent } from "../HTMLComponent";
 import {create, query} from "../utils/domQuery";
 
+/**
+ * Component that is displayed when game is over with points summary
+ * @decorator UIComponent
+ * @example
+ * ```ts
+ *   const popup = new Popup(this.pointsCounter.numPoints);
+ *   popup.mount(document.body);
+ ```
+ */
 @UIComponent({
     selector: 'component-popup',
     template: `<div></div>`,
